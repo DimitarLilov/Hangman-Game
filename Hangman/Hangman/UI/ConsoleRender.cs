@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hangman.UI
+﻿namespace Hangman.UI
 {
-    class ConsoleRender
+    using System;
+    using Hangman.Contracts;
+
+    public class ConsoleRender : IRenderer
     {
+        public void Clear()
+        {
+            Console.Clear();
+        }
+
+        public void WriteLine(string message, params object[] param)
+        {
+            Console.WriteLine(message, param);
+        }
     }
 }
