@@ -1,20 +1,14 @@
 ﻿namespace Hangman
 {
-    using System.Reflection;
-    using Hangman.Contracts;
-    using Ninject;
+    using Hangman.Utils;
 
     public class Startup
     {
         static void Main()
         {
-            StandardKernel kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            IGameEngine engine = kernel.Get<IGameEngine>();
+            var game = Game.Instance;
 
-            IGameEngine game = engine;
-
-            game.Run();
+            game.Start();
         }
     }
 }

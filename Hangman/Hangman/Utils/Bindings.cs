@@ -14,6 +14,7 @@
             Bind<IRenderer>().To<ConsoleRender>();
             Bind<IReader>().To<ConsoleReader>();
             Bind<IRandomGenerator>().To<RandomGenerator>();
+            Bind<IRandomWordGenerator>().To<RandomWordGenerator>();
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿namespace Hangman.Engine
 {
+    using System;
     using Hangman.Contracts;
 
     public class HangmanEngine : GameEngine
     {
-        private readonly IRandomGenerator random;
+        private readonly IRandomWordGenerator randomWordGenerator;
 
-        public HangmanEngine(IRenderer render, IReader reader, IRandomGenerator random) : base(render, reader)
+        public HangmanEngine(IRenderer render, IReader reader, IRandomWordGenerator randomWordGenerator) : base(render, reader)
         {
-            this.random = random;
+            this.randomWordGenerator = randomWordGenerator;
         }
 
         public override void Run()
