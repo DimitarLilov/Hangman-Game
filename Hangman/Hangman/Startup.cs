@@ -1,10 +1,8 @@
 ﻿namespace Hangman
 {
-    using Hangman.Contracts;
-    using Hangman.Engine;
-    using Hangman.UI;
-    using Ninject;
     using System.Reflection;
+    using Hangman.Contracts;
+    using Ninject;
 
     public class Startup
     {

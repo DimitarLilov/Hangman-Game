@@ -5,15 +5,19 @@
     public abstract class GameEngine : IGameEngine
     {
 
-        public IRenderer Render { get; }
+        private readonly IRenderer render;
 
-        public IReader Reader { get; }
+        private readonly IReader reader;
 
         public GameEngine(IRenderer render, IReader reader)
         {
-            this.Render = render;
-            this.Reader = reader;
+            this.render = render;
+            this.reader = reader;
         }
+
+        public IRenderer Render => this.render;
+
+        public IReader Reader => this.reader;
 
         public abstract void Run();
         

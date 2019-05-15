@@ -13,6 +13,7 @@
             Bind<IGameEngine>().To<HangmanEngine>();
             Bind<IRenderer>().To<ConsoleRender>();
             Bind<IReader>().To<ConsoleReader>();
+            Bind<IRandomGenerator>().To<RandomGenerator>();
         }
     }
 }

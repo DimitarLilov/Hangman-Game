@@ -1,16 +1,18 @@
-﻿using Hangman.Contracts;
-
-namespace Hangman.Engine
+﻿namespace Hangman.Engine
 {
+    using Hangman.Contracts;
+
     public class HangmanEngine : GameEngine
     {
-        public HangmanEngine(IRenderer render, IReader reader) : base(render, reader)
+        private readonly IRandomGenerator random;
+
+        public HangmanEngine(IRenderer render, IReader reader, IRandomGenerator random) : base(render, reader)
         {
+            this.random = random;
         }
 
         public override void Run()
         {
-            this.Render.WriteLine("A");
         }
     }
 }
