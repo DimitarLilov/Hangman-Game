@@ -13,8 +13,8 @@
         string ReadLine();
 
         /// <summary>
-        /// Method for reading keypress info
+        /// Method for reading singel char
         /// </summary>
-        ConsoleKeyInfo ReadKey();
+        char ReadKey();
     }
 }

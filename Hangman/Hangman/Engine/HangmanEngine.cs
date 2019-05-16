@@ -37,7 +37,7 @@
                 }
 
                 this.DrawManager.DrawEnterLetterMessage();
-                char letter = char.ToLower(this.Reader.ReadKey().KeyChar);
+                char letter = char.ToLower(this.Reader.ReadKey());
                 this.DrawManager.DrawNewLine();
 
                 if (this.IsValidLetter(letter))
@@ -73,16 +73,16 @@
         private void EndGame()
         {
             this.DrawManager.PlayAgain();
-            
-            string response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
 
-            while (response != "Y" && response != "N")
+            char response = char.ToLower(this.Reader.ReadKey());
+
+            while (response != 'y' && response != 'n')
             {
                 this.DrawManager.PlayAgain();
-                response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
+                response = char.ToLower(this.Reader.ReadKey());
             }
 
-            if (response == "Y")
+            if (response == 'y')
             {
                 Startup.Main();
             }
