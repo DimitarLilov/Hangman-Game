@@ -1,5 +1,6 @@
 ﻿namespace Hangman
 {
+    using System;
     using Hangman.Utils;
 
     public class Startup

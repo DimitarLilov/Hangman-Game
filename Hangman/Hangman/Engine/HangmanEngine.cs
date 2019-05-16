@@ -19,10 +19,16 @@
         public override void Run()
         {
             Render.Clear();
-            //while (true)
-            //{
-
-            //}
+            while (true)
+            {
+                if(this.player.Lives <= 0)
+                {
+                    Render.WriteLine(GlobalConstants.Lost);
+                    break;
+                }
+                Render.WriteLine("-1");
+                this.player.Lives--;
+            }
 
             EndGame();
         }
@@ -30,11 +36,13 @@
         private void EndGame()
         {
             this.Render.WriteLine(GlobalConstants.PlayAgain);
-            string response = this.Reader.ReadLine().ToUpper();
+            string response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
+            this.Render.WriteLine(string.Empty);
             while (response != "Y" && response != "N")
             {
                 this.Render.WriteLine(GlobalConstants.PlayAgain);
-                response = this.Reader.ReadLine().ToUpper();
+                response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
+                this.Render.WriteLine(string.Empty);
             }
 
             if (response == "Y")

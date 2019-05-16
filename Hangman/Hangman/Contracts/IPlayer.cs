@@ -2,6 +2,6 @@
 {
     public interface IPlayer
     {
-        int Lives { get; }
+        int Lives { get; set; }
     }
 }

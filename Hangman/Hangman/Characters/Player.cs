@@ -10,6 +10,6 @@
             this.Lives = GlobalConstants.PlayerLives;
         }
 
-        public int Lives { get; }
+        public int Lives { get; set; }
     }
 }

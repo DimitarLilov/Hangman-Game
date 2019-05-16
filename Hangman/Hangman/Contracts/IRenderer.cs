@@ -12,6 +12,10 @@
         /// </summary>
         void WriteLine(string message, params object[] param);
 
+        /// <summary>
+        /// Method for writing in position the text output
+        /// </summary>
+        void WritePosition(int x, int y, string message, params object[] param);
 
         /// <summary>
         /// Method for clear the text output
