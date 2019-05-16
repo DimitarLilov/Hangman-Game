@@ -79,6 +79,7 @@
             {
                 masked.Append($"_ ");
             }
+
             masked.Append($"{lastLetter} ");
 
             return masked.ToString();

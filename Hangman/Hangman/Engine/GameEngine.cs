@@ -4,7 +4,6 @@
 
     public abstract class GameEngine : IGameEngine
     {
-
         private readonly IDrawable drawManager;
 
         private readonly IReader reader;
@@ -19,7 +18,6 @@
 
         public IReader Reader => this.reader;
 
-        public abstract void Run();
-        
+        public abstract void Run();     
     }
 }

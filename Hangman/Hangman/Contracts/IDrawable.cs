@@ -2,15 +2,24 @@
 {
     public interface IDrawable
     {
+        /// <summary>
+        /// Method for drawing assets.
+        /// </summary>
         void DrawAssets();
 
+        /// <summary>
+        /// Method for drawing mistake animation.
+        /// </summary>
         void DrawMistakeAnimation(int mistake);
 
         /// <summary>
-        /// Method for clear output
+        /// Method for clear the output.
         /// </summary>
         void Clear();
 
+        /// <summary>
+        /// Method for drawing game over messsage.
+        /// </summary>
         void DrawLostMessage(string secretWord);
 
         void DrawWinMessage();

@@ -29,6 +29,7 @@
                     this.DrawManager.DrawLostMessage(this.word.SecretWord);
                     break;
                 }
+
                 if (this.word.CheckIfWordIsRevealed())
                 {
                     this.DrawManager.DrawWinMessage();
@@ -39,7 +40,7 @@
                 char letter = char.ToLower(this.Reader.ReadKey().KeyChar);
                 this.DrawManager.DrawNewLine();
 
-                if(this.IsValidLetter(letter))
+                if (this.IsValidLetter(letter))
                 {
                     if (!this.word.ContainsLetter(letter))
                     {
@@ -85,6 +86,7 @@
             {
                 Startup.Main();
             }
+
             this.DrawManager.DrawNewLine();
         }
     }

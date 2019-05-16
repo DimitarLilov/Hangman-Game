@@ -1,7 +1,7 @@
 ﻿namespace Hangman.Utils
 {
-    using Hangman.Contracts;
     using System;
+    using Hangman.Contracts;
 
     public class RandomGenerator : IRandomGenerator
     {

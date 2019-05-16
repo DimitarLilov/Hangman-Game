@@ -35,7 +35,7 @@
 
         public string GenerateRandomWord()
         {
-            return this.words[random.GenerateRandomNumber(this.words.Length - 1)].ToLower();
+            return this.words[this.random.GenerateRandomNumber(this.words.Length - 1)].ToLower();
         }
     }
 }

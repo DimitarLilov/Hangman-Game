@@ -26,7 +26,7 @@
             switch (mistake)
             {
                 case 1:
-                    this.RenderMistake(0,"O");
+                    this.RenderMistake(0, "O");
                     break;
                 case 2:
                     this.RenderMistake(0, "|");
@@ -45,44 +45,6 @@
                 case 5:
                     this.GameOver();
                     break;
-            }
-        }
-
-        private void RenderMistake(int index, string symbol)
-        {
-            this.render.WritePosition(GlobalConstants.MistakeStartLeftPosition, GlobalConstants.MistakeStartTopPosition + index, symbol);
-        }
-
-        private void GameOver()
-        {
-            this.render.WritePosition(GlobalConstants.FaceLeftPosition, GlobalConstants.FaceTopPosition, GlobalConstants.DeathFace);
-            this.RemoveChair();
-        }
-
-        private void RemoveChair()
-        {
-            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition, new string(' ',GlobalConstants.ChairWidth));
-            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition + 1 , new string(' ', GlobalConstants.ChairWidth));
-            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition + 2, new string(' ', GlobalConstants.ChairWidth));
-        }
-
-        private void RenderLogo()
-        {
-            string[] lines = this.fileReader.ReaderAllLines(GlobalConstants.LogoPath);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                this.render.WritePosition(GlobalConstants.LeftLogoPosition, i, lines[i]);
-            }
-        }
-
-        private void RenderGibbet()
-        {
-            string[] lines = this.fileReader.ReaderAllLines(GlobalConstants.GibbetPath);
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                this.render.WritePosition(GlobalConstants.LeftLogoPosition, GlobalConstants.GibbetTopPosition + i, lines[i]);
             }
         }
 
@@ -136,6 +98,44 @@
         public void PlayAgain()
         {
             this.render.WriteLine(GlobalConstants.PlayAgain);
+        }
+
+        private void RenderMistake(int index, string symbol)
+        {
+            this.render.WritePosition(GlobalConstants.MistakeStartLeftPosition, GlobalConstants.MistakeStartTopPosition + index, symbol);
+        }
+
+        private void GameOver()
+        {
+            this.render.WritePosition(GlobalConstants.FaceLeftPosition, GlobalConstants.FaceTopPosition, GlobalConstants.DeathFace);
+            this.RemoveChair();
+        }
+
+        private void RemoveChair()
+        {
+            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition, new string(' ', GlobalConstants.ChairWidth));
+            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition + 1, new string(' ', GlobalConstants.ChairWidth));
+            this.render.WritePosition(GlobalConstants.ChairLeftStartPosition, GlobalConstants.ChairTopStartPosition + 2, new string(' ', GlobalConstants.ChairWidth));
+        }
+
+        private void RenderLogo()
+        {
+            string[] lines = this.fileReader.ReaderAllLines(GlobalConstants.LogoPath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                this.render.WritePosition(GlobalConstants.LeftLogoPosition, i, lines[i]);
+            }
+        }
+
+        private void RenderGibbet()
+        {
+            string[] lines = this.fileReader.ReaderAllLines(GlobalConstants.GibbetPath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                this.render.WritePosition(GlobalConstants.LeftLogoPosition, GlobalConstants.GibbetTopPosition + i, lines[i]);
+            }
         }
     }
 }
