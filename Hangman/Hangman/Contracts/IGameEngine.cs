@@ -2,7 +2,7 @@
 {
     public interface IGameEngine
     {
-        IRenderer Render { get; }
+        IDrawable DrawManager { get; }
 
         IReader Reader { get; }
 

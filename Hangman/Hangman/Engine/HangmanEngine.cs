@@ -9,69 +9,59 @@
 
         private readonly IPlayer player;
 
-        private readonly IDrawable draw;
-
-        public HangmanEngine(IRenderer render, IReader reader,IDrawable draw, IWord word, IPlayer player)
-            : base(render, reader)
+        public HangmanEngine(IDrawable drawManager, IReader reader, IWord word, IPlayer player)
+            : base(drawManager, reader)
         {
             this.word = word;
             this.player = player;
-            this.draw = draw;
         }
 
         public override void Run()
         {
-            Render.Clear();
-            this.draw.Assets();
-            this.PrintMaskedWord(this.word.MaskedWord);
+            this.DrawManager.Clear();
+            this.DrawManager.DrawAssets();
+            this.DrawManager.DrawMaskedWord(this.word.MaskedWord);
 
             while (true)
             {
                 if (this.player.Lives <= 0)
                 {
-                    this.Render.WriteLine(GlobalConstants.Lost);
-                    this.Render.WriteLine(GlobalConstants.SecretWord + this.word.SecretWord);
+                    this.DrawManager.DrawLostMessage(this.word.SecretWord);
                     break;
                 }
                 if (this.word.CheckIfWordIsRevealed())
                 {
-                    this.Render.WriteLine(GlobalConstants.Win);
+                    this.DrawManager.DrawWinMessage();
                     break;
                 }
 
-                this.Render.Write(GlobalConstants.EnterLetter);
+                this.DrawManager.DrawEnterLetterMessage();
                 char letter = char.ToLower(this.Reader.ReadKey().KeyChar);
-                this.Render.WriteLine(string.Empty);
+                this.DrawManager.DrawNewLine();
 
                 if(this.IsValidLetter(letter))
                 {
                     if (!this.word.ContainsLetter(letter))
                     {
-                        this.Render.WriteLine(GlobalConstants.UnrevealedLetter + $"'{letter}'");
+                        this.DrawManager.DrawUnrevealedLetter(letter);
                         this.player.Lives--;
-                        this.draw.MistakeAnimation(GlobalConstants.PlayerLives - this.player.Lives);
+                        this.DrawManager.DrawMistakeAnimation(GlobalConstants.PlayerLives - this.player.Lives);
                     }
                     else
                     {
                         int numberOfLetter = this.word.NumberOfLetter(letter);
-                        string latter = numberOfLetter == 1 ? " letter" : " letters";
-                        this.Render.WriteLine(GlobalConstants.RevealedLetter + numberOfLetter + latter);
+                        this.DrawManager.DrawRevealedLetter(numberOfLetter);
 
-                        this.PrintMaskedWord(this.word.RevealLetter(letter));
+                        this.DrawManager.DrawMaskedWord(this.word.RevealLetter(letter));
                     }
                 }
                 else
                 {
-                    this.Render.WriteLine(GlobalConstants.IncorrectLetter);
+                    this.DrawManager.IncorrectLetter();
                 }
             }
 
             this.EndGame();
-        }
-
-        private void PrintMaskedWord(string word)
-        {
-            this.Render.WritePosition(GlobalConstants.SecretWordLeftPosition, GlobalConstants.SecretWordTopPosition, word);
         }
 
         private bool IsValidLetter(char letter)
@@ -81,12 +71,13 @@
 
         private void EndGame()
         {
-            this.Render.WriteLine(GlobalConstants.PlayAgain);
+            this.DrawManager.PlayAgain();
+            
             string response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
 
             while (response != "Y" && response != "N")
             {
-                this.Render.WriteLine(GlobalConstants.PlayAgain);
+                this.DrawManager.PlayAgain();
                 response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
             }
 
@@ -94,7 +85,7 @@
             {
                 Startup.Main();
             }
-            this.Render.WriteLine(string.Empty);
+            this.DrawManager.DrawNewLine();
         }
     }
 }

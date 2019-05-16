@@ -15,7 +15,7 @@
             Bind<IRenderer>().To<ConsoleRender>();
             Bind<IReader>().To<ConsoleReader>();
             Bind<IFileReader>().To<FileReader>();
-            Bind<IDrawable>().To<Draw>();
+            Bind<IDrawable>().To<DrawManager>();
             Bind<IRandomGenerator>().To<RandomGenerator>();
             Bind<IRandomWordGenerator>().To<RandomWordGenerator>();
             Bind<IPlayer>().To<Player>();

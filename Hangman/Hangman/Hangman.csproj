@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <None Update="Assets\gibbet.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Assets\logo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -3,25 +3,25 @@
     using Hangman.Contracts;
     using Hangman.Utils;
 
-    public class Draw : IDrawable
+    public class DrawManager : IDrawable
     {
         private readonly IFileReader fileReader;
 
         private readonly IRenderer render;
 
-        public Draw(IFileReader fileReader, IRenderer render)
+        public DrawManager(IFileReader fileReader, IRenderer render)
         {
             this.fileReader = fileReader;
             this.render = render;
         }
 
-        public void Assets()
+        public void DrawAssets()
         {
-            RenderLogo();
-            RenderGibbet();
+            this.RenderLogo();
+            this.RenderGibbet();
         }
 
-        public void MistakeAnimation(int mistake)
+        public void DrawMistakeAnimation(int mistake)
         {
             switch (mistake)
             {
@@ -84,6 +84,58 @@
             {
                 this.render.WritePosition(GlobalConstants.LeftLogoPosition, GlobalConstants.GibbetTopPosition + i, lines[i]);
             }
+        }
+
+        public void Clear()
+        {
+            this.render.Clear();
+        }
+
+        public void DrawLostMessage(string secretWord)
+        {
+            this.render.WriteLine(GlobalConstants.Lost);
+            this.render.WriteLine(GlobalConstants.SecretWord + secretWord);
+        }
+
+        public void DrawWinMessage()
+        {
+            this.render.WriteLine(GlobalConstants.Win);
+        }
+
+        public void DrawEnterLetterMessage()
+        {
+            this.render.Write(GlobalConstants.EnterLetter);
+        }
+
+        public void DrawNewLine()
+        {
+            this.render.WriteLine(string.Empty);
+        }
+
+        public void DrawUnrevealedLetter(char letter)
+        {
+            this.render.WriteLine(GlobalConstants.UnrevealedLetter + $"'{letter}'");
+        }
+
+        public void DrawRevealedLetter(int numberOfLetter)
+        {
+            string latter = numberOfLetter == 1 ? " letter" : " letters";
+            this.render.WriteLine(GlobalConstants.RevealedLetter + numberOfLetter + latter);
+        }
+
+        public void DrawMaskedWord(string word)
+        {
+            this.render.WritePosition(GlobalConstants.SecretWordLeftPosition, GlobalConstants.SecretWordTopPosition, word);
+        }
+
+        public void IncorrectLetter()
+        {
+            this.render.WriteLine(GlobalConstants.IncorrectLetter);
+        }
+
+        public void PlayAgain()
+        {
+            this.render.WriteLine(GlobalConstants.PlayAgain);
         }
     }
 }

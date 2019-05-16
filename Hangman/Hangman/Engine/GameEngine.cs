@@ -5,17 +5,17 @@
     public abstract class GameEngine : IGameEngine
     {
 
-        private readonly IRenderer render;
+        private readonly IDrawable drawManager;
 
         private readonly IReader reader;
 
-        public GameEngine(IRenderer render, IReader reader)
+        public GameEngine(IDrawable drawManager, IReader reader)
         {
-            this.render = render;
+            this.drawManager = drawManager;
             this.reader = reader;
         }
 
-        public IRenderer Render => this.render;
+        public IDrawable DrawManager => this.drawManager;
 
         public IReader Reader => this.reader;
 
