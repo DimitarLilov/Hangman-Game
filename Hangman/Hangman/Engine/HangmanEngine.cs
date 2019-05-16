@@ -21,8 +21,6 @@
             Render.Clear();
             while (true)
             {
-                this.Render.WriteLine(this.word.SecretWord);
-
                 if (this.player.Lives <= 0)
                 {
                     Render.WriteLine(GlobalConstants.Lost);
@@ -42,16 +40,12 @@
                     this.player.Lives--;
                 }
 
-                this.Render.WriteLine(this.word.MaskedWord);
                 this.Render.WriteLine(this.word.RevealLetter(latter));
                 this.Render.WriteLine(string.Empty);
             }
 
             this.EndGame();
         }
-
-
-
 
         private void EndGame()
         {

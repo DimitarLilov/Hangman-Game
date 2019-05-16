@@ -6,25 +6,23 @@
 
     public class Word : IWord
     {
-        private readonly string secretWord;
+        private readonly string word;
 
         private string maskedWord;
 
         public Word(IRandomWordGenerator randomWordGenerator)
         {
-            this.secretWord = randomWordGenerator.GenerateRandomWord();
-            this.maskedWord = this.Mask(this.secretWord);
+            this.word = randomWordGenerator.GenerateRandomWord();
+            this.maskedWord = this.Mask(this.word);
         }
 
         public string MaskedWord => this.maskedWord;
-
-        public string SecretWord => this.secretWord;
 
         public bool ContainsLetter(char letter)
         {
             letter = char.ToLower(letter);
 
-            return this.secretWord.Contains(letter);
+            return this.word.Contains(letter);
         }
 
         public int NumberOfLetter(char letter)
@@ -32,9 +30,9 @@
             int number = 0;
             letter = char.ToLower(letter);
 
-            for (int index = 1; index < this.secretWord.Length - 1; index++)
+            for (int index = 1; index < this.word.Length - 1; index++)
             {
-                if (this.secretWord[index].Equals(letter))
+                if (this.word[index].Equals(letter))
                 {
                     number++;
                 }
@@ -48,9 +46,9 @@
             StringBuilder maskedWordBuilder = new StringBuilder(this.maskedWord);
             char letterLowerCase = char.ToLower(letter);
 
-            for (int wordLenght = 0; wordLenght < this.secretWord.Length - 1; wordLenght++)
+            for (int wordLenght = 0; wordLenght < this.word.Length - 1; wordLenght++)
             {
-                int letterIndex = this.secretWord.IndexOf(letterLowerCase, wordLenght);
+                int letterIndex = this.word.IndexOf(letterLowerCase, wordLenght);
 
                 if (letterIndex >= 0)
                 {
