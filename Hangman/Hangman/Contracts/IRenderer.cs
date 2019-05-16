@@ -10,6 +10,11 @@
         /// <summary>
         /// Method for writing the text output
         /// </summary>
+        void Write(string message, params object[] param);
+
+        /// <summary>
+        /// Method for writing line the text output
+        /// </summary>
         void WriteLine(string message, params object[] param);
 
         /// <summary>

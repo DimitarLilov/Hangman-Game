@@ -19,50 +19,80 @@
         public override void Run()
         {
             Render.Clear();
+            this.PrintLogo();
             while (true)
             {
                 if (this.player.Lives <= 0)
                 {
-                    Render.WriteLine(GlobalConstants.Lost);
+                    this.Render.WriteLine(GlobalConstants.Lost);
+                    this.Render.WriteLine(GlobalConstants.SecretWord + this.word.SecretWord);
                     break;
                 }
                 if (this.word.CheckIfWordIsRevealed())
                 {
-                    Render.WriteLine(GlobalConstants.Win);
+                    this.Render.WriteLine(GlobalConstants.Win);
                     break;
                 }
 
-                char latter = this.Reader.ReadKey().KeyChar;
+                this.Render.Write(GlobalConstants.EnterLetter);
+                char letter = this.Reader.ReadKey().KeyChar;
                 this.Render.WriteLine(string.Empty);
 
-                if(!this.word.ContainsLetter(latter))
+                if(this.IsValidLetter(letter))
                 {
-                    this.player.Lives--;
+                    if (!this.word.ContainsLetter(letter))
+                    {
+                        this.Render.WriteLine(GlobalConstants.UnrevealedLetter + $"'{letter}'");
+                        this.player.Lives--;
+                    }
+                    else
+                    {
+                        int numberOfLetter = this.word.NumberOfLetter(letter);
+                        string latter = numberOfLetter == 1 ? " letter" : " letters";
+                        this.Render.WriteLine(GlobalConstants.RevealedLetter + numberOfLetter + latter);
+                        this.Render.WriteLine(this.word.RevealLetter(letter));
+                    }
                 }
-
-                this.Render.WriteLine(this.word.RevealLetter(latter));
-                this.Render.WriteLine(string.Empty);
+                else
+                {
+                    this.Render.WriteLine(GlobalConstants.IncorrectLetter);
+                }
             }
 
             this.EndGame();
+        }
+
+        private void PrintLogo()
+        {
+            string[] lines = new FileReader().ReaderAllLines(GlobalConstants.LogoPath);
+
+            for(int i=0; i < lines.Length; i++)
+            {
+                this.Render.WritePosition(GlobalConstants.LeftLogoPosition, i, lines[i]);
+            }        
+        }
+
+        private bool IsValidLetter(char letter)
+        {
+            return (letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z');
         }
 
         private void EndGame()
         {
             this.Render.WriteLine(GlobalConstants.PlayAgain);
             string response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
-            this.Render.WriteLine(string.Empty);
+
             while (response != "Y" && response != "N")
             {
                 this.Render.WriteLine(GlobalConstants.PlayAgain);
                 response = this.Reader.ReadKey().KeyChar.ToString().ToUpper();
-                this.Render.WriteLine(string.Empty);
             }
 
             if (response == "Y")
             {
                 Startup.Main();
             }
+            this.Render.WriteLine(string.Empty);
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public interface IWord
     {
+        string SecretWord { get; }
+
         string MaskedWord { get; }
 
         bool ContainsLetter(char letter);
