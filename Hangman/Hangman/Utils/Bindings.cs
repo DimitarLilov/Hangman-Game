@@ -17,6 +17,7 @@
             Bind<IRandomGenerator>().To<RandomGenerator>();
             Bind<IRandomWordGenerator>().To<RandomWordGenerator>();
             Bind<IPlayer>().To<Player>();
+            Bind<IWord>().To<Word>();
         }
     }
 }

@@ -5,14 +5,14 @@
 
     public class HangmanEngine : GameEngine
     {
-        private readonly IRandomWordGenerator randomWordGenerator;
+        private readonly IWord word;
 
         private readonly IPlayer player;
 
-        public HangmanEngine(IRenderer render, IReader reader, IRandomWordGenerator randomWordGenerator, IPlayer player) 
+        public HangmanEngine(IRenderer render, IReader reader, IWord word, IPlayer player) 
             : base(render, reader)
         {
-            this.randomWordGenerator = randomWordGenerator;
+            this.word = word;
             this.player = player;
         }
 
@@ -21,16 +21,34 @@
             Render.Clear();
             while (true)
             {
-                if(this.player.Lives <= 0)
+                this.Render.WriteLine(this.word.SecretWord);
+
+                if (this.player.Lives <= 0)
                 {
                     Render.WriteLine(GlobalConstants.Lost);
                     break;
                 }
-                Render.WriteLine("-1");
-                this.player.Lives--;
+                if (this.word.CheckIfWordIsRevealed())
+                {
+                    Render.WriteLine(GlobalConstants.Win);
+                    break;
+                }
+
+                char latter = this.Reader.ReadKey().KeyChar;
+                this.Render.WriteLine(string.Empty);
+
+                if(!this.word.ContainsLetter(latter))
+                {
+                    this.player.Lives--;
+                }
+                this.Render.WriteLine(this.word.MaskedWord);
+                this.Render.WriteLine(this.word.RevealLetter(latter));
+                this.Render.WriteLine(string.Empty);
+
+                //this.player.Lives--;
             }
 
-            EndGame();
+            this.EndGame();
         }
 
         private void EndGame()
