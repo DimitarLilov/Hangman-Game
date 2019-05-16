@@ -9,17 +9,22 @@
 
         private readonly IPlayer player;
 
-        public HangmanEngine(IRenderer render, IReader reader, IWord word, IPlayer player) 
+        private readonly IDrawable draw;
+
+        public HangmanEngine(IRenderer render, IReader reader,IDrawable draw, IWord word, IPlayer player)
             : base(render, reader)
         {
             this.word = word;
             this.player = player;
+            this.draw = draw;
         }
 
         public override void Run()
         {
             Render.Clear();
-            this.PrintLogo();
+            this.draw.Assets();
+            this.PrintMaskedWord(this.word.MaskedWord);
+
             while (true)
             {
                 if (this.player.Lives <= 0)
@@ -35,7 +40,7 @@
                 }
 
                 this.Render.Write(GlobalConstants.EnterLetter);
-                char letter = this.Reader.ReadKey().KeyChar;
+                char letter = char.ToLower(this.Reader.ReadKey().KeyChar);
                 this.Render.WriteLine(string.Empty);
 
                 if(this.IsValidLetter(letter))
@@ -44,13 +49,15 @@
                     {
                         this.Render.WriteLine(GlobalConstants.UnrevealedLetter + $"'{letter}'");
                         this.player.Lives--;
+                        this.draw.MistakeAnimation(GlobalConstants.PlayerLives - this.player.Lives);
                     }
                     else
                     {
                         int numberOfLetter = this.word.NumberOfLetter(letter);
                         string latter = numberOfLetter == 1 ? " letter" : " letters";
                         this.Render.WriteLine(GlobalConstants.RevealedLetter + numberOfLetter + latter);
-                        this.Render.WriteLine(this.word.RevealLetter(letter));
+
+                        this.PrintMaskedWord(this.word.RevealLetter(letter));
                     }
                 }
                 else
@@ -62,14 +69,9 @@
             this.EndGame();
         }
 
-        private void PrintLogo()
+        private void PrintMaskedWord(string word)
         {
-            string[] lines = new FileReader().ReaderAllLines(GlobalConstants.LogoPath);
-
-            for(int i=0; i < lines.Length; i++)
-            {
-                this.Render.WritePosition(GlobalConstants.LeftLogoPosition, i, lines[i]);
-            }        
+            this.Render.WritePosition(GlobalConstants.SecretWordLeftPosition, GlobalConstants.SecretWordTopPosition, word);
         }
 
         private bool IsValidLetter(char letter)

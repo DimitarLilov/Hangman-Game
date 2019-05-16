@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\gibbet.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\logo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

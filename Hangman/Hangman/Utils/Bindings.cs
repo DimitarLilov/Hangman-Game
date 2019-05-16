@@ -14,6 +14,8 @@
             Bind<IGameEngine>().To<HangmanEngine>();
             Bind<IRenderer>().To<ConsoleRender>();
             Bind<IReader>().To<ConsoleReader>();
+            Bind<IFileReader>().To<FileReader>();
+            Bind<IDrawable>().To<Draw>();
             Bind<IRandomGenerator>().To<RandomGenerator>();
             Bind<IRandomWordGenerator>().To<RandomWordGenerator>();
             Bind<IPlayer>().To<Player>();
