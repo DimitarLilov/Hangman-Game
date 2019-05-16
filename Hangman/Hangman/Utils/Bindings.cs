@@ -1,5 +1,6 @@
 ﻿namespace Hangman.Utils
 {
+    using Hangman.Characters;
     using Hangman.Contracts;
     using Hangman.Engine;
     using Hangman.UI;
@@ -15,6 +16,7 @@
             Bind<IReader>().To<ConsoleReader>();
             Bind<IRandomGenerator>().To<RandomGenerator>();
             Bind<IRandomWordGenerator>().To<RandomWordGenerator>();
+            Bind<IPlayer>().To<Player>();
         }
     }
 }

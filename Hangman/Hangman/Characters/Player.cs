@@ -1,21 +1,15 @@
-﻿using Hangman.Utils;
+﻿using Hangman.Contracts;
+using Hangman.Utils;
 
 namespace Hangman.Characters
 {
-    public class Player
+    public class Player : IPlayer
     {
-        private readonly string name;
-
-        private readonly int lives;
-
-        public Player(string name)
+        public Player()
         {
-            this.name = name;
-            this.lives = GlobalConstants.PlayerLives;
+            this.Lives = GlobalConstants.PlayerLives;
         }
 
-        public string Name => this.name;
-
-        public int Lives => this.lives;
+        public int Lives { get; }
     }
 }

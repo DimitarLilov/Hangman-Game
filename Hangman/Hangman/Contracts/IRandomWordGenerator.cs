@@ -2,6 +2,6 @@
 {
     public interface IRandomWordGenerator
     {
-        string Word { get; }
+        string GenerateRandomWord();
     }
 }

@@ -5,8 +5,6 @@
 
     public class RandomWordGenerator : IRandomWordGenerator
     {
-        private string word;
-
         private readonly string[] words =
         {
             "unit",
@@ -28,23 +26,15 @@
         public RandomWordGenerator(IRandomGenerator random)
         {
             this.random = random;
-            this.Word = this.word;
         }
 
-        public string Word
+        public RandomWordGenerator(IRandomGenerator random, string[] words)
         {
-            get
-            {
-                return this.word;
-            }
-
-            private set
-            {
-                this.word = this.GetRandomWord();
-            }
+            this.random = random;
+            this.words = words;
         }
 
-        private string GetRandomWord()
+        public string GenerateRandomWord()
         {
             return this.words[random.GenerateRandomNumber(this.words.Length - 1)];
         }
