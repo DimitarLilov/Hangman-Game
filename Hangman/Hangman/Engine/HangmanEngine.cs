@@ -41,15 +41,17 @@
                 {
                     this.player.Lives--;
                 }
+
                 this.Render.WriteLine(this.word.MaskedWord);
                 this.Render.WriteLine(this.word.RevealLetter(latter));
                 this.Render.WriteLine(string.Empty);
-
-                //this.player.Lives--;
             }
 
             this.EndGame();
         }
+
+
+
 
         private void EndGame()
         {

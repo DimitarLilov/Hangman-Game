@@ -17,8 +17,13 @@
 
         public void WritePosition(int x, int y, string message, params object[] param)
         {
+            int currentLeft = Console.CursorLeft;
+            int currentTop = Console.CursorTop;
+
             Console.SetCursorPosition(x, y);
             Console.WriteLine(message, param);
+
+            Console.SetCursorPosition(currentLeft, currentTop);
         }
     }
 }
