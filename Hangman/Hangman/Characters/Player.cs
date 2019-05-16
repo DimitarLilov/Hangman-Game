@@ -1,8 +1,8 @@
-﻿using Hangman.Contracts;
-using Hangman.Utils;
-
-namespace Hangman.Characters
+﻿namespace Hangman.Characters
 {
+    using Hangman.Contracts;
+    using Hangman.Utils;
+
     public class Player : IPlayer
     {
         public Player()

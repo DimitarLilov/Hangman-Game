@@ -4,7 +4,7 @@
 
     public class Startup
     {
-        static void Main()
+        public static void Main()
         {
             var game = Game.Instance;
 

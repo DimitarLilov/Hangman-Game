@@ -1,6 +1,5 @@
 ﻿namespace Hangman.Utils
 {
-    using System;
     using Hangman.Contracts;
 
     public class RandomWordGenerator : IRandomWordGenerator
