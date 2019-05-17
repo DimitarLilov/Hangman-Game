@@ -1,5 +1,6 @@
 ﻿namespace Hangman.Engine
 {
+    using System.Collections.Generic;
     using Hangman.Contracts;
     using Hangman.Utils;
 
@@ -9,28 +10,36 @@
 
         private readonly IPlayer player;
 
+        private readonly ICollection<char> historyLetters;
+
         public HangmanEngine(IDrawable drawManager, IReader reader, IWord word, IPlayer player)
             : base(drawManager, reader)
         {
             this.word = word;
             this.player = player;
+            this.historyLetters = new HashSet<char>();
         }
+
+        public IWord Word => this.word;
+
+        public IPlayer Player => this.player;
 
         public override void Run()
         {
             this.DrawManager.Clear();
             this.DrawManager.DrawAssets();
-            this.DrawManager.DrawMaskedWord(this.word.MaskedWord);
+            this.DrawManager.DrawMaskedWord(this.Word.MaskedWord);
 
             while (true)
             {
-                if (this.player.Lives <= 0)
+                if (this.Player.Lives <= 0)
                 {
-                    this.DrawManager.DrawLostMessage(this.word.SecretWord);
+                    this.DrawManager.DrawLostMessage(this.Word.SecretWord);
+                    this.DrawManager.DrawMaskedWord(string.Join(" ", this.Word.SecretWord.ToCharArray()));
                     break;
                 }
 
-                if (this.word.CheckIfWordIsRevealed())
+                if (this.Word.CheckIfWordIsRevealed())
                 {
                     this.DrawManager.DrawWinMessage();
                     break;
@@ -40,25 +49,30 @@
                 char letter = char.ToLower(this.Reader.ReadKey());
                 this.DrawManager.DrawNewLine();
 
-                if (this.IsValidLetter(letter))
+                if (!this.historyLetters.Contains(letter))
                 {
-                    if (!this.word.ContainsLetter(letter))
+                    this.historyLetters.Add(letter);
+
+                    if (this.IsValidLetter(letter))
                     {
-                        this.DrawManager.DrawUnrevealedLetter(letter);
-                        this.player.Lives--;
-                        this.DrawManager.DrawMistakeAnimation(GlobalConstants.PlayerLives - this.player.Lives);
+                        if (!this.Word.ContainsLetter(letter))
+                        {
+                            this.DrawManager.DrawUnrevealedLetter(letter);
+                            this.Player.Lives--;
+                            this.DrawManager.DrawMistakeAnimation(GlobalConstants.PlayerLives - this.Player.Lives);
+                        }
+                        else
+                        {
+                            int numberOfLetter = this.Word.NumberOfLetter(letter);
+                            this.DrawManager.DrawRevealedLetter(numberOfLetter);
+
+                            this.DrawManager.DrawMaskedWord(this.Word.RevealLetter(letter));
+                        }
                     }
                     else
                     {
-                        int numberOfLetter = this.word.NumberOfLetter(letter);
-                        this.DrawManager.DrawRevealedLetter(numberOfLetter);
-
-                        this.DrawManager.DrawMaskedWord(this.word.RevealLetter(letter));
+                        this.DrawManager.IncorrectLetter();
                     }
-                }
-                else
-                {
-                    this.DrawManager.IncorrectLetter();
                 }
             }
 

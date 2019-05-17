@@ -5,11 +5,13 @@
 
     public class Player : IPlayer
     {
+        private int lives;
+
         public Player()
         {
-            this.Lives = GlobalConstants.PlayerLives;
+            this.lives = GlobalConstants.PlayerLives;
         }
 
-        public int Lives { get; set; }
+        public int Lives { get => this.lives; set => this.lives = value; }
     }
 }

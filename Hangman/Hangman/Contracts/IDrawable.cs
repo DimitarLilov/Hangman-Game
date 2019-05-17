@@ -10,7 +10,7 @@
         /// <summary>
         /// Method for drawing mistake animation.
         /// </summary>
-        void DrawMistakeAnimation(int mistake);
+        void DrawMistakeAnimation(int mistakes);
 
         /// <summary>
         /// Method for clear the output.

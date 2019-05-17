@@ -24,7 +24,8 @@
         {
             letter = char.ToLower(letter);
 
-            return this.secretWord.Contains(letter);
+            string word = this.secretWord.Substring(1, this.secretWord.Length - 2);
+            return word.Contains(letter);
         }
 
         public int NumberOfLetter(char letter)
@@ -58,9 +59,7 @@
                 }
             }
 
-            this.maskedWord = maskedWordBuilder.ToString();
-
-            return this.maskedWord;
+            return this.maskedWord = maskedWordBuilder.ToString();
         }
 
         public bool CheckIfWordIsRevealed()
@@ -73,16 +72,16 @@
             char firstLetter = word[0];
             char lastLetter = word[word.Length - 1];
 
-            StringBuilder masked = new StringBuilder(word.Length * 2);
-            masked.Append($"{firstLetter} ");
+            StringBuilder maskedBuilder = new StringBuilder(word.Length * 2);
+            maskedBuilder.Append($"{firstLetter} ");
             for (int i = 0; i < word.Length - 2; i++)
             {
-                masked.Append($"_ ");
+                maskedBuilder.Append($"_ ");
             }
 
-            masked.Append($"{lastLetter} ");
+            maskedBuilder.Append($"{lastLetter} ");
 
-            return masked.ToString();
+            return maskedBuilder.ToString();
         }
     }
 }

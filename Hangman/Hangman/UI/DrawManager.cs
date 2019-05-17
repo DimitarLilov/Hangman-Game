@@ -21,9 +21,9 @@
             this.RenderGibbet();
         }
 
-        public void DrawMistakeAnimation(int mistake)
+        public void DrawMistakeAnimation(int mistakes)
         {
-            switch (mistake)
+            switch (mistakes)
             {
                 case 1:
                     this.RenderMistake(0, "O");
