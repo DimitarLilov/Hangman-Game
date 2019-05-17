@@ -15,6 +15,20 @@
             Console.Write(message, param);
         }
 
+        public void WriteLineRedColor(string message, params object[] param)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message, param);
+            Console.ResetColor();
+        }
+
+        public void WriteLineYellowColor(string message, params object[] param)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message, param);
+            Console.ResetColor();
+        }
+
         public void WriteLine(string message, params object[] param)
         {
             Console.WriteLine(message, param);

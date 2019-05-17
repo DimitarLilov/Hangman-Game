@@ -40,7 +40,7 @@
 
         public const string Win = "\nYOU ARE A WINER";
 
-        public const string Lost = "Sorry, you lost.";
+        public const string Lost = "\nSorry, you lost.";
 
         public const string LogoPath = "Assets/logo.txt";
 

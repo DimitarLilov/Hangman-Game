@@ -55,13 +55,13 @@
 
         public void DrawLostMessage(string secretWord)
         {
-            this.render.WriteLine(GlobalConstants.Lost);
+            this.render.WriteLineRedColor(GlobalConstants.Lost);
             this.render.WriteLine(GlobalConstants.SecretWord + secretWord);
         }
 
         public void DrawWinMessage()
         {
-            this.render.WriteLine(GlobalConstants.Win);
+            this.render.WriteLineYellowColor(GlobalConstants.Win);
         }
 
         public void DrawEnterLetterMessage()
